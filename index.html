@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Task Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+  <div id="input-container">
+    <h1>task completion tracker</h1>
+    <label for="task-count">how many tasks would you like to track?</label>
+    <input type="number" id="task-count" min="1" value="3">
+    <button onclick="generatetaskInputs()">create task tracker</button>
+    
+    <div id="task-inputs"></div>
+    <button id="start-button" style="display:none;" onclick="startTracker()">start tracker</button>
+  </div>
+
+  <div id="container" style="display:none;"></div>
+
+  <script>
+    function generatetaskInputs() {
+      const count = document.getElementById('task-count').value;
+      const taskInputsDiv = document.getElementById('task-inputs');
+      taskInputsDiv.innerHTML = ''; // Clear any previous inputs
+
+      for (let i = 0; i < count; i++) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Enter task ' + (i + 1);
+        input.id = 'task-' + i;
+        taskInputsDiv.appendChild(document.createElement('br'));
+        taskInputsDiv.appendChild(input);
+        taskInputsDiv.appendChild(document.createElement('br'));
+      }
+
+      document.getElementById('start-button').style.display = 'block'; // Show the "Start Tracker" button
+    }
+
+    function startTracker() {
+      const container = document.getElementById('container');
+      const count = document.getElementById('task-count').value;
+      container.innerHTML = ''; // Clear any previous sections
+
+      for (let i = 0; i < count; i++) {
+        const task = document.getElementById('task-' + i).value;
+        if (task) {
+          const section = document.createElement('div');
+          section.className = 'section';
+          section.textContent = task;
+          section.onclick = function() { completeSection(this); };
+          container.appendChild(section);
+        }
+      }
+
+      // Recalculate initial sizes
+      recalculateSizes();
+
+      // Hide input form and show tracker
+      document.getElementById('input-container').style.display = 'none';
+      container.style.display = 'flex';
+    }
+
+    function completeSection(section) {
+      // Remove the clicked section
+      section.remove();
+
+      // Recalculate sizes for remaining sections
+      recalculateSizes();
+
+      // If all sections are completed, show a message
+      if (document.querySelectorAll('#container .section').length === 0) {
+        const container = document.getElementById('container');
+        container.innerHTML = "<div class='empty'>All tasks completed!</div>";
+      }
+    }
+
+    function recalculateSizes() {
+      const sections = document.querySelectorAll('#container .section');
+      const sectionCount = sections.length;
+
+      sections.forEach(sec => {
+        sec.style.flex = `1 1 calc(100% / ${sectionCount})`;
+      });
+    }
+  </script>
+
+</body>
+</html>

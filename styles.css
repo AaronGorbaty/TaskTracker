@@ -1,0 +1,85 @@
+* {
+  font-family: "Sixtyfour Convergence";
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  margin: 0;
+}
+
+#input-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  max-width: 800px;
+  height: 500px;
+  background-color: lightgray;
+  border-radius: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.section {
+  flex: 1 1 calc(100% / 3); /* Initially divide by 3 */
+  margin: 10px;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.section:hover {
+  background-color: #c3e6cb;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#start-button {
+  display: block;
+  margin: 20px auto; /* Centers the button horizontally */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: rgba(175, 76, 106, 0.5); /* 50% transparency */
+  color: white; /* White text */
+  border: 2px solid black; /* Black border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+#start-button:hover {
+  background-color: rgba(199, 47, 93, 0.7); /* Darker on hover */
+  transform: scale(1.05); /* Slightly enlarges the button on hover */
+  color: white;
+}
+
+#start-button:active {
+  transform: scale(0.98); /* Slightly shrink when clicked */
+}
+
+#container .empty {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
